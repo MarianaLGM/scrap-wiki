@@ -4,7 +4,7 @@
 //3.Crear un servidor http
 
 
-const axios=require ("axios")
+const axios=require("axios")
 const cheerio=require ("cheerio")
 const express= require ("express")
 const app= express()
@@ -22,42 +22,27 @@ app.get("/", (req,res)=>{
            // res.send(html)  esto lo que hará es cargar todo el html
 
 // Paso 5: Crea un array y dentro guarda cada uno de los datos de las páginas en un objeto (título, imagenes, textos)
-            const title=$("title").text()
-            const textos=[];
-            const imgs=[];
+            const nuevosDatos=[]
 
-            $("#mw-pages a").each((index, element)=>{//cheerio tiene una opcion para recorrer las imagenes
+
+            $("#mw-pages a").each((index, element)=>{
+            
               const texto=$(element).attr("href")
-              textos.push(texto)//una vez que lo tenemos vamos a pushearlo
+              const title=$(element).attr("title")
+              const imgs=$(element).attr("src")
+              nuevosDatos.push({
+                texto:texto,
+                title:title,
+                imgs:imgs})//una vez que lo tenemos vamos a pushearlo
           })
-      
-            $("img").each((index, element)=>{//cheerio tiene una opcion para recorrer las imagenes
-            const img=$(element).attr("src")
-            imgs.push(img)//una vez que lo tenemos vamos a pushearlo
-          })
-        //console.log(links)
-        console.log(imgs)
-    res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    </head>
-    <body>
-    <h1>${title}</h1>
-        <ul>
-          ${textos.map(texto=>`<li>${texto}</li>`).join("")}
-        </ul>
-        <h2>Imágenes</h2>
-        <ul>
-        ${imgs.map(img=>`<li><a href="${url}${img}>${img}</a></li>`).join("")}
-        </ul>
-    </body>
-    </html> 
-       `
-        )
+
+        $("img").each((index, element)=>{//cheerio tiene una opcion para recorrer las imagenes
+           console.log(element)
+        })
+    
+    res.send(nuevosDatos)
+    
+    
     }
     })
     
@@ -76,8 +61,10 @@ app.get("/", (req,res)=>{
 
 // Paso 5: Crea un array y dentro guarda cada uno de los datos de las páginas en un objeto (título, imagenes, textos)
             const rapero=[
-                {titulo,imagenes,textos}
-            ]; 
+                titulo:
+                imagenes:
+                textos:
+                
 
         const titulo=$("title").text()
         $("#mw-pages a").each((index, element)=>{//cheerio tiene una opcion para recorrer las imagenes
@@ -86,8 +73,8 @@ app.get("/", (req,res)=>{
         })
       
         $("img").each((index, element)=>{//cheerio tiene una opcion para recorrer las imagenes
-            const imgen=$(element).attr("src")
-            imagenes.push(imgen)//una vez que lo tenemos vamos a pushearlo
+            const imagen=$(element).attr("src")
+            imagenes.push(imagen)//una vez que lo tenemos vamos a pushearlo
         })
           
     res.send(`
