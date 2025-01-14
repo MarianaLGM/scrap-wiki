@@ -39,3 +39,32 @@ Saca toda esa información en un console.log() cuando todo termine, o en un res.
 
 Aquí tienes la documentación de Cheerio: https://cheerio.js.org/docs/intro
 Aquí tienes la documentación de Axios: https://axios-http.com/es/docs/intro
+
+
+
+
+/*  $("#mw-pages a").each((index, element)=>{
+              const texto=$(element).attr("href")
+              const titulo=$(element).attr("titulo")
+            /*  const urlRapero=`https://es.wikipedia.org/${texto}`
+
+              //guardamos las promesas en un array
+              const promesa=axios.get(urlRap).then((response)=>{
+                const che= cheerio.load(response.data);
+                const img=che("a.mw-file-description img").attr("src")*/
+            
+              return{
+                texto:urlRapero,
+                titulo:titulo,
+                imgs:img
+               }
+          })
+        //})
+        //promesas.push(promesa)
+    
+    }
+  
+})
+})
+
+
